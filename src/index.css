@@ -1,0 +1,14 @@
+.show {
+  background: green;
+  cursor: pointer;
+}
+.disable {
+  background: red;
+  pointer-events: none;
+}
+.done {
+  background: red;
+}
+.notDone {
+  background: #fff;
+}
