@@ -10,11 +10,17 @@ function App() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    getLocalTodos();
+  }, []);
+
+  useEffect(() => {
     checkTodos();
+    saveToLocal();
   }, [showData, status]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    const setData = JSON.parse(localStorage.getItem(showData));
     setShowData([
       ...showData,
       {
@@ -44,30 +50,30 @@ function App() {
     setShowData(newData);
   }
 
-  function editTodo(todo){
-    const editTodo = showData.map(item=>{
-      if(item.id===todo.id){
+  function editTodo(todo) {
+    const editTodo = showData.map((item) => {
+      if (item.id === todo.id) {
         return {
           ...item,
           edit: !item.edit,
-        }
+        };
       }
       return item;
-    })
+    });
     setShowData(editTodo);
   }
 
-    function updateTodo(todo){
-    const updateTodo = showData.map(item=>{
-      if(item.id===todo.id){
+  function updateTodo(todo) {
+    const updateTodo = showData.map((item) => {
+      if (item.id === todo.id) {
         return {
           ...item,
-         todos: todo.todos,
-         edit: false,
-        }
+          todos: todo.todos,
+          edit: false,
+        };
       }
       return item;
-    })
+    });
     return setShowData(updateTodo);
   }
 
@@ -84,6 +90,19 @@ function App() {
         break;
     }
   }
+
+  function saveToLocal() {
+    localStorage.setItem("showData", JSON.stringify(showData));
+  }
+
+  function getLocalTodos() {
+    if (localStorage.getItem("showData") === null) {
+      localStorage.setItem("showData", JSON.stringify([]));
+    } else {
+      setShowData(JSON.parse(localStorage.getItem("showData")));
+    }
+  }
+
   return (
     <>
       <InputData

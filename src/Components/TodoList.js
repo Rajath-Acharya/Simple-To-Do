@@ -3,7 +3,7 @@ import React,{useState,useEffect} from "react";
 function TodoList({ list, deleteTodo, taskDone, editTodo,updateTodo }) {
   const [newTodos, setNewTodos]=useState([]);
   useEffect(() => {
-setNewTodos(list)
+setNewTodos(list);
   }, [list]);
 
   function changeTodo(e,todo){
