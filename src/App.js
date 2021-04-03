@@ -20,7 +20,6 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const setData = JSON.parse(localStorage.getItem(showData));
     setShowData([
       ...showData,
       {
